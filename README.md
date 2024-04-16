@@ -24,6 +24,56 @@ The feature selection techniques used are:
 3.Embedded Method
 
 # CODING AND OUTPUT:
-       # INCLUDE YOUR CODING AND OUTPUT SCREENSHOTS HERE
+```
+import pandas as pd
+from scipy import stats
+import numpy as np
+import seaborn as sns
+```
+```
+df=pd.read_csv("/content/bmi (1).csv")
+df1=pd.read_csv("/content/bmi (1).csv")
+df2=pd.read_csv("/content/bmi (1).csv")
+df3=pd.read_csv("/content/bmi (1).csv")
+df4=pd.read_csv("/content/bmi (1).csv")
+```
+```
+df.head()
+```
+![Screenshot 2024-04-16 160612](https://github.com/Anusharonselva/EXNO-4-DS/assets/119405600/b679364c-c039-40bf-8969-2ce47e4cee22)
+```
+df.dropna()
+```
+![Screenshot 2024-04-16 160729](https://github.com/Anusharonselva/EXNO-4-DS/assets/119405600/21e2db4c-16f2-408f-9436-083db5f334ba)
+```
+max_vals = np.max(np.abs(df[['Height','Weight']]))
+max_vals
+```
+![Screenshot 2024-04-16 160814](https://github.com/Anusharonselva/EXNO-4-DS/assets/119405600/0be461e2-d30f-4344-b946-ba1890a06fd8)
+```
+from sklearn.preprocessing import StandardScaler
+sc=StandardScaler()
+df1[['Height','Weight']]=sc.fit_transform(df1[['Height','Weight']])
+df1.head(10)
+```
+![Screenshot 2024-04-16 160849](https://github.com/Anusharonselva/EXNO-4-DS/assets/119405600/7237e9e5-ae88-494a-a907-5ff2da9316b2)
+```
+from sklearn.preprocessing import MinMaxScaler
+```
+```
+scaler = MinMaxScaler()
+df[['Height','Weihgt']]=scaler.fit_transform(df[['Height','Weight']])
+df.head(10)
+```
+![Screenshot 2024-04-16 160943](https://github.com/Anusharonselva/EXNO-4-DS/assets/119405600/ff65fe24-96bd-408b-83a9-6b193b352f86)
+```
+from sklearn.preprocessing import Normalizer
+scaler = Normalizer()
+df2[['Height','Weight']]=scaler.fit_transform(df2[['Height','Weight']])
+df2
+```
+![Screenshot 2024-04-16 161036](https://github.com/Anusharonselva/EXNO-4-DS/assets/119405600/7eaea797-2848-402b-a1f9-e5b192a0bbcc)
+```
+
 # RESULT:
        # INCLUDE YOUR RESULT HERE
