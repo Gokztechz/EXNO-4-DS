@@ -74,6 +74,141 @@ df2
 ```
 ![Screenshot 2024-04-16 161036](https://github.com/Anusharonselva/EXNO-4-DS/assets/119405600/7eaea797-2848-402b-a1f9-e5b192a0bbcc)
 ```
+from sklearn.preprocessing import MaxAbsScaler
+scaler =  MaxAbsScaler()
+df3[['Height','Weight']]=scaler.fit_transform(df3[['Height','Weight']])
+df3
+```
+![Screenshot 2024-04-16 201013](https://github.com/Anusharonselva/EXNO-4-DS/assets/119405600/129987b2-931b-49e9-b264-3c70ea9733b5)
+```
+from sklearn.preprocessing import RobustScaler
+scaler =  RobustScaler()
+df4[['Height','Weight']]=scaler.fit_transform(df4[['Height','Weight']])
+df4.head()
+```
+![Screenshot 2024-04-16 201139](https://github.com/Anusharonselva/EXNO-4-DS/assets/119405600/ccd25eea-502a-4129-9696-3167f5ffd99b)
+```
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import accuracy_score,confusion_matrix
+```
+```
+data=pd.read_csv('/content/income(1) (1).csv',na_values=[' ?'])
+data
+```
+![Screenshot 2024-04-16 201253](https://github.com/Anusharonselva/EXNO-4-DS/assets/119405600/b3aedff6-9a3a-4b06-be82-5d636c099003)
+```
+data.isnull().sum()
+```
+![Screenshot 2024-04-16 201330](https://github.com/Anusharonselva/EXNO-4-DS/assets/119405600/80ef2909-b382-43d0-b707-310ed6279f23)
+```
+missing = data[data.isnull().any(axis=1)]
+missing
+```
+![Screenshot 2024-04-16 201418](https://github.com/Anusharonselva/EXNO-4-DS/assets/119405600/c970672c-0be4-4998-bc52-80277975d1aa)
+```
+data2 = data.dropna(axis=0)
+data2
+```
+![Screenshot 2024-04-16 201450](https://github.com/Anusharonselva/EXNO-4-DS/assets/119405600/66ebe610-256a-45d8-9a5b-a736f7b13917)
+```
+sal=data['SalStat']
+data2['SalStat']=data2['SalStat'].map({' less than or equal to 50,000':0,' greater than 50,000':1})
+print(data2['SalStat'])
+```
+![Screenshot 2024-04-16 201545](https://github.com/Anusharonselva/EXNO-4-DS/assets/119405600/2c04a96a-4693-4370-ba3c-515c8ea3e94d)
+```
+sal2=data2['SalStat']
+dfs=pd.concat([sal,sal2],axis=1)
+dfs
+```
+![Screenshot 2024-04-16 201622](https://github.com/Anusharonselva/EXNO-4-DS/assets/119405600/a46fc0d9-cc3f-4ec8-a4a9-8fd77ba8991b)
+```
+data2
+```
+![Screenshot 2024-04-16 201649](https://github.com/Anusharonselva/EXNO-4-DS/assets/119405600/c8444a71-6129-4bc0-8deb-c9cc61edc15b)
+```
+new_data=pd.get_dummies(data2, drop_first=True)
+new_data
+```
+![Screenshot 2024-04-16 201731](https://github.com/Anusharonselva/EXNO-4-DS/assets/119405600/9a843098-fb65-46f2-8244-aa83d5881af1)
+```
+columns_list=list(new_data.columns)
+print(columns_list)
+```
+![Screenshot 2024-04-16 201801](https://github.com/Anusharonselva/EXNO-4-DS/assets/119405600/3dafffd5-d2b0-42cc-b69c-35cd20e4ce04)
+```
+features=list(set(columns_list)-set(['SalStat']))
+print(features)
+```
+![Screenshot 2024-04-16 201830](https://github.com/Anusharonselva/EXNO-4-DS/assets/119405600/5354b558-8f78-4fac-9918-d5a62183eb73)
+```
+y=new_data['SalStat'].values
+print(y)
+```
+![Screenshot 2024-04-16 201856](https://github.com/Anusharonselva/EXNO-4-DS/assets/119405600/b5403ca0-ccbb-4d05-863c-7060548526c7)
+```
+x=new_data[features].values
+print(x)
+```
+![Screenshot 2024-04-16 201924](https://github.com/Anusharonselva/EXNO-4-DS/assets/119405600/de691ffc-a1b2-42e4-b5a7-dc23f0fdfb50)
+```
+import pandas as pd
+from sklearn.feature_selection import SelectKBest, mutual_info_classif, f_classif
+```
+```
+data={
+    'Feature1':[1,2,3,4,5],
+    'Feature2':['A','B','C','A','B'],
+    'Feature3':[0,1,1,0,1],
+    'Target':[0,1,1,0,1]
+
+}
+```
+```
+df=pd.DataFrame(data)
+df
+```
+![Screenshot 2024-04-16 202141](https://github.com/Anusharonselva/EXNO-4-DS/assets/119405600/64228545-2aa1-401f-a857-cd6f4a6f3303)
+```
+X=df[['Feature1','Feature3']]
+y=df[['Target']]
+```
+```
+selector=SelectKBest(score_func=mutual_info_classif,k=1)
+X_new=selector.fit_transform(X,y)
+```
+![Screenshot 2024-04-16 202218](https://github.com/Anusharonselva/EXNO-4-DS/assets/119405600/90910896-bab7-46e1-adb5-65d5e65fe0c6)
+```
+selected_feature_indices=selector.get_support(indices=True)
+selected_features=X.columns[selected_feature_indices]
+print("Selected Features:")
+print(selected_features)
+```
+![Screenshot 2024-04-16 202255](https://github.com/Anusharonselva/EXNO-4-DS/assets/119405600/6f74dd65-29d1-4c44-a8dd-a10a742ad9a4)
+```
+import pandas as pd
+import numpy as np
+from scipy.stats import chi2_contingency
+```
+```
+import seaborn as sns
+tips=sns.load_dataset('tips')
+tips.head()
+```
+![Screenshot 2024-04-16 202347](https://github.com/Anusharonselva/EXNO-4-DS/assets/119405600/1696d545-34ff-4eb0-8c09-78f592c259b4)
+```
+contingency_table=pd.crosstab(tips['sex'],tips['time'])
+print(contingency_table)
+```
+![image](https://github.com/Anusharonselva/EXNO-4-DS/assets/119405600/422ee4a0-e291-426a-ad36-069994157303)
+```
+chi2, p, _, _=chi2_contingency(contingency_table)
+print(f"Chi-Square Statistic: {chi2}")
+print(f"P-value: {p}")
+```
+![Screenshot 2024-04-16 203545](https://github.com/Anusharonselva/EXNO-4-DS/assets/119405600/3cea47d6-ef13-436e-901a-4d7130be86d2)
+
 
 # RESULT:
-       # INCLUDE YOUR RESULT HERE
+      
+ Thus feature scaling and selection is performed.
